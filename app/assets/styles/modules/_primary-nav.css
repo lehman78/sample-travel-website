@@ -1,8 +1,14 @@
 .primary-nav {
+	padding-top: 10px;
 
+	@mixin atMedium {
+		padding-top: 0;
+	}
 
 	&--pull-right {
-		float: right;
+		@mixin atMedium {
+			float: right;
+		}
 	}
 
 	ul {
@@ -13,14 +19,37 @@
 
 	li {
 		list-style: none;
-		float: left;
-		padding-right: 20px;
-		padding-top: 12px;
+		display: inline-block; /* this will allow links to be horizontally centered */
+		padding-right: 7px; /* along with padding-right: 0; for li:last-child will save up screen to fit 3rd li*/
+		@mixin atMedium {
+			float: left;
+			display: block;
+			padding-right: 20px;
+		}
+	}
+
+	li:last-child {
+		padding-right: 0; /* to save screen so 3rd li can fit in */
+		@mixin atMedium {
+			padding-right: 20px;
+		}
 	}
 
 	a {
 		color: #FFF;
 		text-decoration: none;
 		font-weight: 300;
+		display: block;
+		padding: 5px 7px;
+		font-size: .8rem;
+		background-color: rgba($mainBlue, .7);
+		
+
+		@mixin atMedium {
+			font-size: 1rem;
+			padding: 12px 0;
+			background-color: transparent;
+
+		}
 	}
 }

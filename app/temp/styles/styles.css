@@ -1121,7 +1121,13 @@ Gulp. Instead edit gulp/templates/sprite file. */
 	position: absolute;
 	width: 100%;
 	z-index: 2;
+	-webkit-transition: background-color .3s ease-out;
+	transition: background-color .3s ease-out;
 }
+
+.site-header--is-expanded {
+		background-color: rgba(47,85,114, .55);
+	}
 
 @media (min-width: 800px) {
 
@@ -1130,8 +1136,11 @@ Gulp. Instead edit gulp/templates/sprite file. */
 }
 	}
 
+@media (min-width: 800px) {
+
 .site-header__btn-container {
-		float: right;
+			float: right
+		}
 	}
 
 .site-header__logo {
@@ -1164,6 +1173,7 @@ Gulp. Instead edit gulp/templates/sprite file. */
 		height: 20px;
 		background-color: #FFF;
 		position: absolute;
+		z-index: 10;
 		top: 10px;
 		right: 10px;
 	}
@@ -1176,18 +1186,51 @@ Gulp. Instead edit gulp/templates/sprite file. */
 	}
 
 .site-header__menu-content {
-		display: none;
+		opacity: 0;
+		-webkit-transform: scale(1.2);
+		        transform: scale(1.2); /* zoom-in effect*/
+		-webkit-transition: all .3s ease-out;
+		transition: all .3s ease-out;
+		position: relative; /* must include with z-index otherwise browser won't acknoledge our z-index value */
+		z-index: -10; /* To make it sit below all the content of the page -- prevent user accidently clicking on menu-content since it's technically still there (opacity is set to 0).*/
+		padding-top: 90px;
+		text-align: center;
 	}
 
 @media (min-width: 800px) {
 
 .site-header__menu-content {
-			display: block
+			opacity: 1;
+			z-index: 1;
+			padding-top: 0;
+			-webkit-transform: scale(1);
+			        transform: scale(1)
 	}
 	}
 
+.site-header__menu-content--is-visible {
+			opacity: 1;
+			z-index: 1;
+			-webkit-transform: scale(1);
+			        transform: scale(1); /* zoom-in effect for small screens */
+		}
+
+.primary-nav {
+	padding-top: 10px;
+}
+
+@media (min-width: 800px) {
+
+.primary-nav {
+		padding-top: 0
+}
+	}
+
+@media (min-width: 800px) {
+
 .primary-nav--pull-right {
-		float: right;
+			float: right
+	}
 	}
 
 .primary-nav ul {
@@ -1203,13 +1246,49 @@ Gulp. Instead edit gulp/templates/sprite file. */
 
 .primary-nav li {
 		list-style: none;
-		float: left;
-		padding-right: 20px;
-		padding-top: 12px;
+		display: inline-block; /* this will allow links to be horizontally centered */
+		padding-right: 7px;
+	}
+
+/* along with padding-right: 0; for li:last-child will save up screen to fit 3rd li*/
+
+@media (min-width: 800px) {
+
+.primary-nav li {
+			float: left;
+			display: block;
+			padding-right: 20px
+	}
+	}
+
+.primary-nav li:last-child {
+		padding-right: 0;
+	}
+
+/* to save screen so 3rd li can fit in */
+
+@media (min-width: 800px) {
+
+.primary-nav li:last-child {
+			padding-right: 20px
+	}
 	}
 
 .primary-nav a {
 		color: #FFF;
 		text-decoration: none;
 		font-weight: 300;
+		display: block;
+		padding: 5px 7px;
+		font-size: .8rem;
+		background-color: rgba(47,85,114, .7);
+	}
+
+@media (min-width: 800px) {
+
+.primary-nav a {
+			font-size: 1rem;
+			padding: 12px 0;
+			background-color: transparent
+	}
 	}
