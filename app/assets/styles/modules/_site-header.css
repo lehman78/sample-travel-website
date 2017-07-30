@@ -43,15 +43,66 @@
 
 	&__menu-icon {
 		width: 20px;
-		height: 20px;
-		background-color: #FFF;
+		height: 19px;
 		position: absolute;
-		z-index: 10;
 		top: 10px;
 		right: 10px;
+		z-index: 10;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20px;
+			height: 3px;
+			background-color: #FFF;
+			transform-origin: 0 0; /* pivot point by browser's default is 50% 50% (horiz. vertical) -- perfect center.
+			By setting values to 0 (left corner) 0 (vertical top corner) we are setting pivot point at top left corner.*/
+			transition: transform .3s ease-out;
+
+		}
+
+		&__middle {
+			position: absolute;
+			top: 8px;
+			left: 0;
+			width: 20px;
+			height: 3px;
+			background-color: #FFF;
+			transition: all .3s ease-out;
+			transform-origin: 0 50%; /* 0 (left corner) 50% (vertical center of that left corner) */
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 20px;
+			height: 3px;
+			background-color: #FFF;
+			transform-origin: 0 100%; /* 0 (bottom corner) 100% (vertical bottom corner) */
+			transition: transform .3s ease-out;
+		}
 
 		@mixin atMedium {
 			display: none;
+		}
+	}
+
+	&__menu-icon--close-x {
+		&::before {
+			transform: rotate(45deg) scaleX(1.25);
+		}
+
+		.site-header__menu-icon__middle {
+			opacity: 0;
+			transform: scaleX(0);
+		}
+
+		&::after {
+		transform: rotate(-45deg) scaleX(1.25) translateY(1px);/* translateY(1px) to push bar down 1px */
 		}
 	}
 
